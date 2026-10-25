@@ -1,0 +1,35 @@
+.venv/
+__pycache__/
+*.pyc
+*.orig
+*.bak
+config/api_keys.json
+config/certs/
+memory/long_term.json
+memory/recent_dialogue.json
+memory/dialogue_archive.jsonl
+memory/memory_archive.json
+memory/backups/
+memory/*.lock
+memory/*.corrupt-*
+memory/dashboard_history.json
+memory/dashboard_memory.json
+memory/dashboard_reminders.json
+uploads/
+node_modules/
+barehands/state/
+barehands/barehands.json
+runtime/
+# Local voice models (large, downloaded by the owner; see docs/LOCAL_VOICE.md)
+models/
+
+# The owner's real secrets — the Gemini key lives here. NEVER commit this.
+.env
+
+# Test scratch (generated; never commit)
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Test/build output (npm run build)
+dist/

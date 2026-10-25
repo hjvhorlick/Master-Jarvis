@@ -1,0 +1,13 @@
+# JARVIS's voice, all on this computer (local_voice/service.py). No Gemini is used for voice.
+# Install with:  pip install -r backend/requirements-local-voice.txt
+# Then see docs/LOCAL_VOICE.md (the Kokoro voice files go in models/kokoro/).
+#
+# kokoro-onnx   MIT      the voice: Kokoro-82M makes the speech on this computer.
+# sounddevice   MIT      plays the voice through this computer's speakers.
+# faster-whisper MIT     turns the microphone's audio into words. Its model downloads once.
+# numpy         BSD      audio arrays.
+kokoro-onnx==0.6.1
+sounddevice
+faster-whisper==1.2.1
+numpy
+soundfile

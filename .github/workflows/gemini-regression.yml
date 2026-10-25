@@ -1,0 +1,49 @@
+name: Gemini regression checks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  node-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Type-check the server and configuration
+        run: npm run lint
+
+      - name: Build the server bundle
+        run: npm run build
+
+      - name: Test persistent memory and knowledge stores
+        run: npm run test:node
+
+      - name: Test Gemini configuration, model fallback, and voice with a local stub
+        run: node tests/config_harness.mjs --http-only
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python test runner
+        run: python -m pip install pytest
+
+      - name: Test Python Gemini model configuration and TTS
+        run: python -m pytest -q tests/test_gemini_model_config.py tests/test_gemini_tts.py
